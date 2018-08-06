@@ -6,9 +6,6 @@
   - role: git
   - role: oracle-jdk
     java_license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
-  - role: maven
-  - role: intellij-idea
-    intellij_edition: ultimate
   - role: docker
     docker_group_members:
-      - developer
+      - dremy

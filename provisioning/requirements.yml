@@ -1,14 +1,8 @@
-- name: intellij-idea
-  src: gantsign.intellij
-
 - name: oracle-jdk
   src: gantsign.java
 
 - name: git
   src: geerlingguy.git
-
-- name: maven
-  src: gantsign.maven
 
 - name: docker
   src: angstwad.docker_ubuntu
