@@ -6,3 +6,6 @@
 
 - name: docker
   src: angstwad.docker_ubuntu
+
+- name: vscode
+  src: gantsign.visual-studio-code
