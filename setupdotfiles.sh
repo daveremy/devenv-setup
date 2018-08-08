@@ -1,3 +1,7 @@
+#!/bin/bash
+
+#Script to setup symbolic links to all the files in /vagrant/dotfiles
+
 echo "Copying dotfiles for $USER"
 
 # function to backup dotfile, delete it, and then create
@@ -15,8 +19,10 @@ configDotFile() {
 	ln -s /vagrant/dotfiles/$dotfile ~/$dotfile
 }
 
-configDotFile .bashrc
-configDotFile .bash_aliases
-configDotFile .vimrc
-
-
+# Configure each dot file in /vagrant/dotfiles
+# set dotglob to show hidden files also
+shopt -s dotglob
+for file in /vagrant/dotfiles/*
+do
+    configDotFile  "$(basename $file)"
+done

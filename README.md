@@ -13,7 +13,7 @@ Some supported Hypervisor (e.g., VirtualBox)
 * If using VirtualBox: Before starting the virtual machine install Vagrant Virtualbox Guest Additions plugin: `vagrant plugin install vagrant-vbguest`
 * The user name that is created is in /provisioning/roles/user/tasks/main.yml.  To specify a password a hash must be used.  To get the has, from a unix command prompt use: `mkpasswd -m sha-512 MySecretPassword`.
 * Use `vagrant reload` after initial install.
-* dotfiles can be found in dotfiles directory. *They must edited from unix for the lined endings to be correct*  (TODO: Create bash script that will read through all the files in the directory and configure them, at the moment .bashrc, .bashrc_aliases, and .vimrc supported)
+* dotfiles can be found in dotfiles directory. *They must edited from unix for the lined endings to be correct* 
 
 ## Main things installed
 
