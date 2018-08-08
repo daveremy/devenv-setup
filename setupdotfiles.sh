@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #Script to setup symbolic links to all the files in /vagrant/dotfiles
 
