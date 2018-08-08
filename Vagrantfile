@@ -6,28 +6,28 @@ Vagrant.configure("2") do |config|
 	vb.memory = 4096
 	vb.cpus = 4
 	vb.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
-	vb.customize ["modifyvm", :id, "--vram", "256"]
+  vb.customize ["modifyvm", :id, "--vram", "256"]
+  vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional'] 
   end
 
-  # Install Git, Node.js 6.x.x, Latest npm
-  config.vm.provision "shell", inline: <<-SHELL
-    apt-get update
-    # curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-    # apt-get install -y nodejs
-    # apt-get install -y build-essential
-    # npm install -g npm
-    # apt-get update
-    # apt-get upgrade -y
-    # apt-get autoremove -y
-  SHELL
-
+  # user dremy is created by ansible.  TODO: Make username configurable
   config.vm.provision "ansible_local" do |ansible|
     ansible.groups = {
       'sde' => ['default']
     }
-	ansible.sudo = true
-	ansible.galaxy_role_file = 'provisioning/requirements.yml'
+	  # ansible.sudo = true
+    ansible.become = true
+	  ansible.galaxy_role_file = 'provisioning/requirements.yml'
     ansible.playbook = "provisioning/playbook.yml"
   end  
+  
+  # set bash shell for dremy (for some reason it wasn't going to bash)
+  config.vm.provision "shell", inline: "sudo usermod -s /bin/bash dremy"
+  
+  # run shell script as other user to setup user specific configuration
+  #  This seems hackish but it will run the script in the user's home directory (-H)
+  #  as the user (-u).  Note the scripts need to have unix line endings (I just edited
+  #  them in unix).
+  config.vm.provision "shell", inline: "sudo -H -u dremy /vagrant/setupdotfiles.sh"
   
 end
