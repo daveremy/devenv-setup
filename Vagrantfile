@@ -1,13 +1,16 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-18.04"
 
+  config.vm.network :public_network
+
   config.vm.provider :virtualbox do |vb|
     vb.gui = true
-	vb.memory = 4096
-	vb.cpus = 4
-	vb.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
-  vb.customize ["modifyvm", :id, "--vram", "256"]
-  vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional'] 
+    vb.memory = 4096
+    vb.cpus = 4
+    vb.customize ["modifyvm", :id, "--monitorcount", "3"]
+    vb.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
+    vb.customize ["modifyvm", :id, "--vram", "256"]
+    vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional'] 
   end
 
   # user dremy is created by ansible.  TODO: Make username configurable
@@ -27,6 +30,7 @@ Vagrant.configure("2") do |config|
   #  This seems hackish but it will run the script in the user's home directory (-H)
   #  as the user (-u).  Note the scripts need to have unix line endings (I just edited
   #  them in unix).
-  config.vm.provision "shell", inline: "sudo -H -u dremy /vagrant/setupdotfiles.sh"
+  config.vm.provision "shell", inline: "sudo -H -u dremy /vagrant/scripts/setupZsh.sh"
+  config.vm.provision "shell", inline: "sudo -H -u dremy /vagrant/scripts/setupdotfiles.sh"
   
 end
