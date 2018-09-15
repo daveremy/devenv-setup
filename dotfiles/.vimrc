@@ -25,7 +25,33 @@
 "    -> Helper functions
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set number " Show current line number
+set relativenumber "Show relative line numbers
 
+" Automatic completion for omnicomplete/YouCompleteMe
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typespcript'] = ['.']
+" set completeopt-=preview
+
+" enable fuzzy search
+set rtp+=~/.fzf
+
+" FZF bindings
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-g>g :Ag<CR>
+nnoremap <leader><leader> :Commands<CR>
+nnoremap <C-p> :call FzfOmniFiles()<CR>
+
+fun! FzfOmniFiles()
+  let is_git = system('git status')
+  if v:shell_error
+    :Files
+  else
+    :GitFiles
+  endif
+endfun
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -326,6 +352,17 @@ map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
+
+"""""""
+" put here by dremy for powerline status line
+set rtp+=/home/dremy/.local/lib/python2.7/site-packages
+""""""""
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
+" Pathogen
+execute pathogen#infect()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

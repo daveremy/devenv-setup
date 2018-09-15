@@ -3,6 +3,7 @@
 # for examples
 
 # If not running interactively, don't do anything
+echo "TEST!"
 case $- in
     *i*) ;;
       *) return;;
@@ -115,3 +116,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+

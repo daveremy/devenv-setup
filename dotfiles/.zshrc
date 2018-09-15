@@ -4,10 +4,23 @@
 # Path to your oh-my-zsh installation.
   export ZSH="/home/dremy/.oh-my-zsh"
 
+# user most for man pages if it is installed
+if command -v most > /dev/null 2>&1; then
+    export PAGER="most"
+fi
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="bira"
+# ZSH_THEME="amuse"
+# ZSH_THEME="agnoster"
+# ZSH_THEME="random"
+
+. /home/dremy/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+
+# 10ms for key sequences
+KEYTIMEOUT=1
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -63,6 +76,9 @@ ZSH_THEME="bira"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  vi-mode
+  zsh-syntax-highlighting
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -95,3 +111,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin:~/.local/bin
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export GOPATH="/home/dremy/workspace/go/"
+export PATH=$PATH:$GOPATH/bin

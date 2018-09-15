@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider :virtualbox do |vb|
     vb.gui = true
-    vb.memory = 4096
+    vb.memory = 8192
     vb.cpus = 4
     vb.customize ["modifyvm", :id, "--monitorcount", "3"]
     vb.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
